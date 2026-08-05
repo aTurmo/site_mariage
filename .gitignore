@@ -1,0 +1,6 @@
+.claude
+.idea
+CLAUDE.md
+*.iml
+node_modules
+dist
