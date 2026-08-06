@@ -12,7 +12,7 @@ describe('WelcomeHero', () => {
     render(<WelcomeHero />)
 
     expect(screen.getByText('27 mars 2027')).toBeInTheDocument()
-    expect(screen.getByText('[[LIEU DE RÉCEPTION]] · Rouen')).toBeInTheDocument()
+    expect(screen.getByText('Rouen & Bardouville')).toBeInTheDocument()
   })
 
   it('invites the visitor to come back for the details', () => {

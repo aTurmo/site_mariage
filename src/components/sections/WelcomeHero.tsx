@@ -39,7 +39,7 @@ export default function WelcomeHero() {
           {weddingDetails.date}
         </p>
         <p className="text-label-caps uppercase text-on-surface-variant">
-          {`${weddingDetails.venue} · ${weddingDetails.city}`}
+          {weddingDetails.cities}
         </p>
         <p className="max-w-xl text-body-lg text-on-surface-variant">
           Nous serions très heureux de partager cette journée avec vous. Vous trouverez ici tout ce

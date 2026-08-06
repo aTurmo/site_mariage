@@ -1,5 +1,7 @@
 import hotelDeVilleRouen from '../assets/hotel-de-ville-rouen.jpeg'
 import planHotelDeVilleRouen from '../assets/plan-hotel-de-ville-rouen.jpeg'
+import valSarah from '../assets/val_sarah.jpg'
+import valSarahMap from '../assets/val_sarah_map.png'
 import AccommodationSection from '../components/sections/AccommodationSection'
 import DecorativeBreak from '../components/sections/DecorativeBreak'
 import EventSection from '../components/sections/EventSection'
@@ -26,8 +28,8 @@ export default function HomePage() {
         title="La réception"
         description="La soirée se poursuivra autour d’un dîner, puis de la piste de danse."
         details={weddingDetails.reception}
-        image={{ alt: '[[PHOTO DU LIEU DE LA RÉCEPTION]]' }}
-        map={{ alt: '[[PLAN D’ACCÈS À LA RÉCEPTION]]' }}
+        image={{ src: valSarah, alt: 'Le Val Sarah, lieu de la réception' }}
+        map={{ src: valSarahMap, alt: 'Plan d’accès au Val Sarah, à Bardouville' }}
         imageSide="right"
       />
       <AccommodationSection />
