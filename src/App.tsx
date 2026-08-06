@@ -5,6 +5,7 @@ import TopNavBar from './components/layout/TopNavBar'
 import AccommodationSection from './components/sections/AccommodationSection'
 import DecorativeBreak from './components/sections/DecorativeBreak'
 import EventSection from './components/sections/EventSection'
+import RsvpSection from './components/sections/RsvpSection'
 import WelcomeHero from './components/sections/WelcomeHero'
 import { weddingDetails } from './content/weddingDetails'
 
@@ -35,6 +36,7 @@ export default function App() {
           imageSide="right"
         />
         <AccommodationSection />
+        <RsvpSection />
       </main>
       <SiteFooter />
     </>

@@ -11,6 +11,7 @@ describe('App', () => {
     expect(
       screen.getByRole('heading', { name: 'Besoin d’un endroit où dormir\u202f?' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Confirmez votre présence' })).toBeInTheDocument()
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 })
