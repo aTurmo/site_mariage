@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import RsvpGuestFields from '../components/sections/RsvpGuestFields'
 import Reveal from '../components/ui/Reveal'
+import { weddingDetails } from '../content/weddingDetails'
 import { useGuestList } from '../hooks/useGuestList'
 import { appendConfirmations } from '../lib/rsvpCsvStorage'
 
@@ -34,6 +35,7 @@ export default function RsvpPage() {
 
   return (
     <section className="min-h-dvh bg-surface-container-low pt-28 pb-section-mobile md:pt-40 md:pb-section-desktop">
+      <title>{`Confirmez votre présence — ${weddingDetails.coupleNames}`}</title>
       <Reveal className="mx-auto flex max-w-2xl flex-col gap-8 px-6 md:px-gutter">
         <div className="flex flex-col items-center gap-6 text-center">
           <span className="text-label-caps uppercase text-secondary">Votre réponse</span>

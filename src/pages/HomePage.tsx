@@ -11,6 +11,7 @@ import { weddingDetails } from '../content/weddingDetails'
 export default function HomePage() {
   return (
     <>
+      <title>{`${weddingDetails.coupleNames} — ${weddingDetails.date}`}</title>
       <WelcomeHero />
       <EventSection
         id="mairie"

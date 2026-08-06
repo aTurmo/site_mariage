@@ -22,6 +22,7 @@ describe('App', () => {
       screen.getByRole('heading', { name: 'Besoin d’un endroit où dormir ?' }),
     ).toBeInTheDocument()
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
+    expect(document.title).toBe('Eléna et Adrien — 27 mars 2027')
   })
 
   it('keeps the confirmation form on its own page', () => {
@@ -31,6 +32,7 @@ describe('App', () => {
       screen.getByRole('heading', { level: 1, name: 'Confirmez votre présence' }),
     ).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'La mairie' })).not.toBeInTheDocument()
+    expect(document.title).toBe('Confirmez votre présence — Eléna et Adrien')
   })
 
   it('walks the visitor from the home page to the confirmation page', async () => {
@@ -52,5 +54,6 @@ describe('App', () => {
       screen.getByRole('heading', { level: 1, name: 'Cette page n’existe pas' }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Retour à l’accueil' })).toBeInTheDocument()
+    expect(document.title).toBe('Page introuvable — Eléna et Adrien')
   })
 })

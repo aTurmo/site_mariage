@@ -1,8 +1,10 @@
 import { Link } from 'react-router'
+import { weddingDetails } from '../content/weddingDetails'
 
 export default function NotFoundPage() {
   return (
     <section className="flex min-h-dvh flex-col items-center justify-center gap-6 px-6 pt-28 pb-section-mobile text-center md:px-gutter md:pt-40 md:pb-section-desktop">
+      <title>{`Page introuvable — ${weddingDetails.coupleNames}`}</title>
       <span className="text-label-caps uppercase text-secondary">Page introuvable</span>
       <h1 className="font-display text-headline-md text-primary md:text-display-lg-mobile">
         Cette page n’existe pas
