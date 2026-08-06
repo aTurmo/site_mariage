@@ -100,7 +100,7 @@ export default function EventSection({
             </div>
           </dl>
 
-          <SectionImage {...map} className="h-48 w-full" />
+          <SectionImage {...map} fit="contain" className="aspect-[16/9] w-full" />
         </Reveal>
       </div>
     </section>
