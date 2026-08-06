@@ -1,10 +1,19 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router'
 import TopNavBar from './TopNavBar'
+
+function renderNavBar() {
+  render(
+    <MemoryRouter>
+      <TopNavBar />
+    </MemoryRouter>,
+  )
+}
 
 describe('TopNavBar', () => {
   it('keeps the section links out of the menu until it is opened', () => {
-    render(<TopNavBar />)
+    renderNavBar()
 
     expect(screen.getByRole('button', { name: 'Ouvrir le menu' })).toHaveAttribute(
       'aria-expanded',
@@ -15,7 +24,7 @@ describe('TopNavBar', () => {
 
   it('opens the menu when the visitor taps the button', async () => {
     const user = userEvent.setup()
-    render(<TopNavBar />)
+    renderNavBar()
 
     await user.click(screen.getByRole('button', { name: 'Ouvrir le menu' }))
 
@@ -28,7 +37,7 @@ describe('TopNavBar', () => {
 
   it('closes the menu once a section is chosen', async () => {
     const user = userEvent.setup()
-    render(<TopNavBar />)
+    renderNavBar()
 
     await user.click(screen.getByRole('button', { name: 'Ouvrir le menu' }))
     const [, menuLink] = screen.getAllByRole('link', { name: 'Réception' })
@@ -39,7 +48,7 @@ describe('TopNavBar', () => {
 
   it('closes the menu on Escape and hands focus back to the button', async () => {
     const user = userEvent.setup()
-    render(<TopNavBar />)
+    renderNavBar()
 
     await user.click(screen.getByRole('button', { name: 'Ouvrir le menu' }))
     await user.keyboard('{Escape}')
@@ -50,7 +59,7 @@ describe('TopNavBar', () => {
   })
 
   it('always points the button at the menu it controls', () => {
-    render(<TopNavBar />)
+    renderNavBar()
 
     const controlledId = screen
       .getByRole('button', { name: 'Ouvrir le menu' })

@@ -1,14 +1,14 @@
 import { useState, type FormEvent } from 'react'
-import RsvpGuestFields from './RsvpGuestFields'
-import Reveal from '../ui/Reveal'
-import { useGuestList } from '../../hooks/useGuestList'
-import { appendConfirmations } from '../../lib/rsvpCsvStorage'
+import RsvpGuestFields from '../components/sections/RsvpGuestFields'
+import Reveal from '../components/ui/Reveal'
+import { useGuestList } from '../hooks/useGuestList'
+import { appendConfirmations } from '../lib/rsvpCsvStorage'
 
 const missingFieldsMessage = 'Merci d’indiquer le nom et le choix de menu de chaque personne.'
 const storageFailureMessage =
   'Votre navigateur n’a pas pu enregistrer la réponse. Autorisez le stockage local, puis réessayez.'
 
-export default function RsvpSection() {
+export default function RsvpPage() {
   const { guests, confirmedGuests, addGuest, removeGuest, updateGuest } = useGuestList()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hasConfirmed, setHasConfirmed] = useState(false)
@@ -33,16 +33,13 @@ export default function RsvpSection() {
   }
 
   return (
-    <section
-      id="presence"
-      className="bg-surface-container-low py-section-mobile md:py-section-desktop"
-    >
+    <section className="min-h-dvh bg-surface-container-low pt-28 pb-section-mobile md:pt-40 md:pb-section-desktop">
       <Reveal className="mx-auto flex max-w-2xl flex-col gap-8 px-6 md:px-gutter">
         <div className="flex flex-col items-center gap-6 text-center">
           <span className="text-label-caps uppercase text-secondary">Votre réponse</span>
-          <h2 className="font-display text-headline-sm text-primary md:text-headline-md">
+          <h1 className="font-display text-headline-md text-primary md:text-display-lg-mobile">
             Confirmez votre présence
-          </h2>
+          </h1>
           <p className="max-w-xl text-body-lg text-on-surface-variant">
             Indiquez-nous qui sera présent et le menu souhaité pour chaque personne. Vous pouvez
             répondre pour toute votre famille en une seule fois.

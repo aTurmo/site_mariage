@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react'
-import { pageSections } from '../../content/sections'
+import { Link } from 'react-router'
+import { navigationLinks } from '../../content/navigation'
 
 type SectionLinkListProps = ComponentPropsWithoutRef<'ul'> & {
   linkClassName: string
@@ -13,11 +14,11 @@ export default function SectionLinkList({
 }: SectionLinkListProps) {
   return (
     <ul {...listProps}>
-      {pageSections.map((section) => (
-        <li key={section.id}>
-          <a href={`#${section.id}`} onClick={onSelect} className={linkClassName}>
-            {section.label}
-          </a>
+      {navigationLinks.map((link) => (
+        <li key={link.to}>
+          <Link to={link.to} onClick={onSelect} className={linkClassName}>
+            {link.label}
+          </Link>
         </li>
       ))}
     </ul>

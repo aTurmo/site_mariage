@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import RsvpSection from './RsvpSection'
-import { readConfirmationsCsv } from '../../lib/rsvpCsvStorage'
+import RsvpPage from './RsvpPage'
+import { readConfirmationsCsv } from '../lib/rsvpCsvStorage'
 
 type User = ReturnType<typeof userEvent.setup>
 
@@ -22,12 +22,12 @@ async function fillGuest(user: User, position: number, { name, menuChoice, notes
   }
 }
 
-describe('RsvpSection', () => {
+describe('RsvpPage', () => {
   beforeEach(() => localStorage.clear())
 
   it('records the answer of a single guest as a csv row', async () => {
     const user = userEvent.setup()
-    render(<RsvpSection />)
+    render(<RsvpPage />)
 
     await fillGuest(user, 1, { name: 'Camille', menuChoice: 'Vegan', notes: 'Sans champignons' })
     await user.click(screen.getByRole('button', { name: 'Confirmer' }))
@@ -38,7 +38,7 @@ describe('RsvpSection', () => {
 
   it('lets a family answer for several people at once', async () => {
     const user = userEvent.setup()
-    render(<RsvpSection />)
+    render(<RsvpPage />)
 
     await user.click(screen.getByRole('button', { name: 'Ajouter une personne' }))
     await fillGuest(user, 1, { name: 'Louis', menuChoice: 'Halal' })
@@ -52,7 +52,7 @@ describe('RsvpSection', () => {
 
   it('drops a person added by mistake', async () => {
     const user = userEvent.setup()
-    render(<RsvpSection />)
+    render(<RsvpPage />)
 
     await user.click(screen.getByRole('button', { name: 'Ajouter une personne' }))
     await user.click(screen.getByRole('button', { name: 'Retirer la personne 2' }))
@@ -63,7 +63,7 @@ describe('RsvpSection', () => {
 
   it('records nothing until every person has a name and a menu', async () => {
     const user = userEvent.setup()
-    render(<RsvpSection />)
+    render(<RsvpPage />)
 
     await user.click(screen.getByRole('button', { name: 'Ajouter une personne' }))
     await fillGuest(user, 1, { name: 'Louis', menuChoice: 'Halal' })

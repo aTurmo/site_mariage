@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import SectionLinkList from './SectionLinkList'
 import { weddingDetails } from '../../content/weddingDetails'
 import { useHasScrolled } from '../../hooks/useHasScrolled'
@@ -54,9 +55,9 @@ export default function TopNavBar() {
       className={`fixed inset-x-0 top-0 z-50 backdrop-blur-md transition-all ${background}`}
     >
       <div className="mx-auto flex max-w-page items-center justify-between px-6 py-4 md:px-gutter">
-        <a href="#accueil" className="font-display text-headline-sm italic text-primary">
+        <Link to="/#accueil" className="font-display text-headline-sm italic text-primary">
           {weddingDetails.coupleNames}
-        </a>
+        </Link>
 
         <SectionLinkList
           className="hidden items-center gap-8 md:flex"
