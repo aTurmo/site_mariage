@@ -3,18 +3,21 @@ import RsvpGuestFields from '../components/sections/RsvpGuestFields'
 import Reveal from '../components/ui/Reveal'
 import { weddingDetails } from '../content/weddingDetails'
 import { useGuestList } from '../hooks/useGuestList'
-import { appendConfirmations } from '../lib/rsvpCsvStorage'
+import { submitConfirmations } from '../api/rsvpApi'
 
 const missingFieldsMessage = 'Merci d’indiquer le nom et le choix de menu de chaque personne.'
-const storageFailureMessage =
-  'Votre navigateur n’a pas pu enregistrer la réponse. Autorisez le stockage local, puis réessayez.'
+const networkFailureMessage =
+  'Votre réponse n’a pas pu être envoyée. Vérifiez votre connexion, puis réessayez.'
+const serverFailureMessage =
+  'Votre réponse n’a pas pu être enregistrée. Merci de réessayer dans quelques instants.'
 
 export default function RsvpPage() {
   const { guests, confirmedGuests, addGuest, removeGuest, updateGuest } = useGuestList()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [hasConfirmed, setHasConfirmed] = useState(false)
+  const [isSending, setIsSending] = useState(false)
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (confirmedGuests === null) {
@@ -22,15 +25,19 @@ export default function RsvpPage() {
       return
     }
 
-    try {
-      appendConfirmations(confirmedGuests)
-    } catch {
-      setErrorMessage(storageFailureMessage)
+    setErrorMessage(null)
+    setIsSending(true)
+
+    const outcome = await submitConfirmations(confirmedGuests)
+
+    setIsSending(false)
+
+    if (outcome === 'success') {
+      setHasConfirmed(true)
       return
     }
 
-    setErrorMessage(null)
-    setHasConfirmed(true)
+    setErrorMessage(outcome === 'network-failure' ? networkFailureMessage : serverFailureMessage)
   }
 
   return (
@@ -76,14 +83,16 @@ export default function RsvpPage() {
             <div className="flex flex-col gap-4 sm:flex-row-reverse">
               <button
                 type="submit"
-                className="min-h-11 flex-1 bg-primary px-6 py-3 text-label-caps uppercase text-surface transition-opacity hover:opacity-90"
+                disabled={isSending}
+                className="min-h-11 flex-1 bg-primary px-6 py-3 text-label-caps uppercase text-surface transition-opacity hover:opacity-90 disabled:opacity-60"
               >
-                Confirmer
+                {isSending ? 'Envoi…' : 'Confirmer'}
               </button>
               <button
                 type="button"
                 onClick={addGuest}
-                className="min-h-11 flex-1 border border-primary px-6 py-3 text-label-caps uppercase text-primary transition-colors hover:bg-primary/5"
+                disabled={isSending}
+                className="min-h-11 flex-1 border border-primary px-6 py-3 text-label-caps uppercase text-primary transition-colors hover:bg-primary/5 disabled:opacity-60"
               >
                 Ajouter une personne
               </button>

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { MenuChoice } from '../content/menuChoices'
-import type { ConfirmedGuest } from '../lib/guestsCsv'
+import type { ConfirmedGuest } from '../api/rsvpApi'
 
 export type GuestDraft = {
   id: number
